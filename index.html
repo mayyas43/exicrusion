@@ -4,31 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./resources/css/index.css">
-    <title>Hidden Places</title>
+    <title>Document</title>
 </head>
 <body>
-    <div>
-        <h1>Dicover Hidden Places In The World Around You</h1>
-        <a href="">Download Excusion (Coming soon!)</a>
-        <div>
-            <video src="./resources/Assets/excursion.mp4" autoplay></video>
-        </div>
+    <h1>Your Attempts: <span id="h1">0</span></h1>
+    <div id="box">
+        <p id="color">What color am I</p>
     </div>
-    <div>
-        <h2>Your personal travel guide</h2>
-        <p>Excrusion remembers places you like, and recommends new points of interest around you</p>
-        <div>
-            <img src="./resources/Assets/camp.webp" alt="camp">
-        </div>
-        <div>
-            <img src="./resources/Assets/phone.webp" alt="phone">
-        </div>
-    </div>
-    <div>
-        <h2>Coming soon for iPhone and Android</h2>
-        <a href="">Download Excusion (Coming soon!)</a>
-        <h3>Excurion</h3>
-    </div>
+    <button id="red" onclick="randomColor(event)">Red</button>
+    <button id="blue" onclick="randomColor(event)">Blue</button>
+    <style>
+        div{
+            padding: 40px;
+            background-color: lightgray;
+            transition: all 200ms;
+            margin-bottom: 20px;
+        }
+        #blue{
+            background-color: rgb(143, 143, 253);
+        }
+        #red{
+            background-color: rgb(253, 143, 143);
+        }
+    </style>
+    <script>
+        let attempts = 0;
+
+        const h1 = document.getElementById('h1');
+        const p = document.getElementById('color');
+        const box = document.getElementById('box');
+
+        let red = document.getElementById('red');
+        let blue = document.getElementById('blue');
+
+        const randomColor = (event) => {
+            let id = event.target.id;
+            let random = Math.floor(Math.random()*2);
+
+            if(attempts === 3){
+                let button = document.getElementsByTagName('button');
+                for(let i = 0; i<button.length; i++){
+                    button[i].disabled = true
+                }
+
+                p.textContent = 'Good Job You Won';
+                box.style.backgroundColor = 'lightgrey';
+                p.style.color = 'black';
+            } else if(attempts<0){
+                let button = document.getElementsByTagName('button');
+                for(let i = 0; i<button.length; i++){
+                    button[i].disabled = true
+                }
+
+                p.textContent = 'You Lose HAHAHAHAHAHA';
+                box.style.backgroundColor = 'lightgrey';
+                p.style.color = 'black';
+            } else {
+                if(random === 0){
+                    let style = 'blue'
+                    box.style.backgroundColor = style;
+                    if(style === id){
+                        attempts++
+                        p.textContent = 'Good Job, I am blue!';
+                        p.style.color = 'white';
+                        h1.textContent = attempts;
+                    } else {
+                        attempts--
+                        p.textContent = 'Opps I win and you lose, HaHaHa';
+                        p.style.color = 'white';
+                        h1.textContent = attempts;
+                    }
+                } else {
+                    let style = 'red'
+                    box.style.backgroundColor = style;
+                    if(style === id){
+                        attempts++
+                        p.textContent = 'Good Job, I am red!';
+                        p.style.color = 'white';
+                        h1.textContent = attempts;
+                    } else {
+                        attempts--
+                        p.textContent = 'Opps I win and you lose, HaHaHa';
+                        p.style.color = 'white';
+                        h1.textContent = attempts;
+                    }
+                }
+            }
+        }
+
+    </script>
 </body>
 </html>
